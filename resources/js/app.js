@@ -22,7 +22,29 @@ createInertiaApp({
     },
 });
 
-Echo.channel(`messanger`)
+// Echo.channel(`messenger`)
+//     .listen('MessageSent', (e) => {
+//         console.log(e);
+//     });
+
+Echo.private(`messenger`)
     .listen('MessageSent', (e) => {
         console.log(e);
+    });
+
+Echo.join(`group_chat.1`)
+    .here((users) => {
+        console.log(users)
+    })
+    .joining((user) => {
+        console.log(user);
+    })
+    .leaving((user) => {
+        console.log(user);
+    })
+    .listen('GroupChatMessage', (e) => {
+        console.log(e);
+    })
+    .error((error) => {
+        console.error(error);
     });
